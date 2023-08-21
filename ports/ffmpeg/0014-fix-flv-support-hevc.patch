@@ -48,7 +48,7 @@ index 7242296..62d2b8e 100644
          break;
 +    case FLV_CODECID_HEVC:
 +        par->codec_id = AV_CODEC_ID_HEVC;
-+        vstream->need_parsing = AVSTREAM_PARSE_HEADERS;
++        vstreami->need_parsing = AVSTREAM_PARSE_HEADERS;
 +        ret = 3;
 +        break;
      default:
