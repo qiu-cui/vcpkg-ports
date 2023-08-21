@@ -1,7 +1,7 @@
 {
     "default":{
         "ffmpeg": {
-            "baseline": "4.4.3",
+            "baseline": "5.1.2",
             "port-version": 0
         }
     }
