@@ -1,5 +1,7 @@
 vcpkg_minimum_required(VERSION 2022-10-12) # for ${VERSION}
-
+if("rkmpp" IN_LIST FEATURES)
+    set(RKMPP_PATH "0025-supper_rkmpp.patch")
+endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO ffmpeg/ffmpeg
@@ -23,6 +25,7 @@ vcpkg_from_github(
         0020-fix-aarch64-libswscale.patch
         0022-fix-iconv.patch
         0024-fix-gcc13-binutils.patch
+		${RKMPP_PATH}
 )
 
 if(SOURCE_PATH MATCHES " ")
@@ -164,6 +167,10 @@ vcpkg_add_to_path(PREPEND ${prog_env})
 file(REMOVE_RECURSE "${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-dbg" "${CURRENT_BUILDTREES_DIR}/${TARGET_TRIPLET}-rel")
 
 set(FFMPEG_PKGCONFIG_MODULES libavutil)
+
+if("rkmpp" IN_LIST FEATURES)
+    set(OPTIONS "${OPTIONS} --enable-rkmpp --enable-libdrm")
+endif()
 
 if("nonfree" IN_LIST FEATURES)
     set(OPTIONS "${OPTIONS} --enable-nonfree")
